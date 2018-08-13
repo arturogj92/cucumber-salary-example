@@ -2,6 +2,8 @@ package com.abeldevelop.cucumber.salaryexample.resource;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +11,23 @@ import lombok.Setter;
 @Getter
 public class Contract {
 
+	
+	@NotNull
 	private String categoria;
+	
+	@NotNull
 	private String tipoContrato;
+	
+	@NotNull
 	private LocalDate fechaInicio;
+	private LocalDate fechaFin;
+	
 	private String salario;
+	
+	@NotNull
 	private String moneda;
-	private String fechaFin;
+	
+	@NotNull
 	private String cuentaBancaria;
 	
 }

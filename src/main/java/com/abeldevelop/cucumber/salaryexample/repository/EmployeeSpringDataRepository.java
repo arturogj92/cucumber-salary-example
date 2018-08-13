@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.abeldevelop.cucumber.salaryexample.entity.EmployeeEntity;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long>{
+public interface EmployeeSpringDataRepository extends JpaRepository<EmployeeEntity, Long>{
 
 }

@@ -2,12 +2,15 @@ package com.abeldevelop.cucumber.salaryexample.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,10 +19,11 @@ import lombok.Setter;
 @Getter
 
 @Entity
+@SequenceGenerator(name="EMPLOYEE_SEQ", sequenceName="employee_seq")
 public class EmployeeEntity {
 
 	@Id
-    @GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="EMPLOYEE_SEQ")
 	private Long id;
     private String nombre;
     private String apellido;
@@ -30,7 +34,7 @@ public class EmployeeEntity {
     private String sexo;
     private String rol;
     
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_id")
     private ContractEntity contrato;
 }

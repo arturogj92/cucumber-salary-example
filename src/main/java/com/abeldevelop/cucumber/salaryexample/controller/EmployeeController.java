@@ -1,7 +1,10 @@
 package com.abeldevelop.cucumber.salaryexample.controller;
 
-import java.util.ArrayList;
+import java.net.URI;
 import java.util.List;
+
+import javax.validation.Valid;
+import javax.websocket.server.PathParam;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.abeldevelop.cucumber.salaryexample.resource.Employee;
 import com.abeldevelop.cucumber.salaryexample.service.EmployeeService;
@@ -25,47 +29,47 @@ public class EmployeeController {
 	private final EmployeeService employeeService;
 	
 	
-	@PostMapping("/user")
-	public ResponseEntity<Void> crearUsuario(@RequestBody Employee employee) {
-		employeeService.crearUsuario(employee);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+	@PostMapping("/employee")
+	public ResponseEntity<Void> crearUsuario(@Valid @RequestBody Employee employee) {
+		Employee employeeInserted = employeeService.crearUsuario(employee);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employeeInserted.getId()).toUri();
+			
+		return ResponseEntity.created(location).build();
 	}
 	
-	@PutMapping("/user")
+	@PutMapping("/employee")
 	public ResponseEntity<Void> actualizarUsuario(@RequestBody Employee employee) {
 		employeeService.actualizarUsuario(employee);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@DeleteMapping("/user/{id}")
-	public ResponseEntity<Void> borrarUsuario(@PathVariable Long id) {
+	@DeleteMapping("/employee/{id}")
+	public ResponseEntity<Void> borrarUsuario(@PathVariable String id) {
 		employeeService.borrarUsuario(id);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/user")
+	@GetMapping("/employee")
 	public ResponseEntity<List<Employee>> recuperarTodos() {
 		List<Employee> employees = employeeService.recuperarTodos();
 		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}
 	
-	@GetMapping("/user/{id}")
-	public ResponseEntity<Employee> recuperarPorId(@PathVariable Long id) {
-		Employee employee = employeeService.recuperarPorId(id);
-		if(employee != null) {
-			return new ResponseEntity<>(employee, HttpStatus.OK);
-		}
-		else {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
+	@GetMapping("/employee/{id}")
+	public ResponseEntity<Employee> recuperarPorId(@PathVariable String id) {
+		return new ResponseEntity<>(employeeService.recuperarPorId(id), HttpStatus.OK);
+	}
+
+	//Busca por nombre, apellido o dni
+	@GetMapping("/employee/search/{data}")
+	public ResponseEntity<List<Employee>> busquedaSimple(@PathVariable String data) {
+		return new ResponseEntity<>(employeeService.busquedaSimple(data), HttpStatus.OK);
 	}
 	
-	@GetMapping("/user/search")
-	//salario > < y por rol
-	public ResponseEntity<List<Employee>> busquedaAvanzada() {
-		List<Employee> employees = null;
-		
-		return new ResponseEntity<>(employees, HttpStatus.OK);
+	@GetMapping("/employee/search")
+	public ResponseEntity<List<Employee>> busquedaPorSalario(@PathParam("minSalary") String minSalary, @PathParam("maxSalary") String maxSalary, @PathParam("comparator") String comparator) {
+		return new ResponseEntity<>(employeeService.busquedaPorSalario(minSalary, maxSalary, comparator), HttpStatus.OK);
 	}
 	
 }
