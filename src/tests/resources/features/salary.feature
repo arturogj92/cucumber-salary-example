@@ -3,20 +3,11 @@ Feature: Dar de alta un nuevo empleado
 	Background:
 		Given un usuario con privilegios de administrador
 			
-	Scenario Outline: Dar de alta un nuevo empleado sin error
-	Given los datos de entrada <nombre> <apellido> <dni> <cumpleanos> <email> <telefono> <sexo> <rol> <categoria> <tipoContrato> <fechaInicio> <fechaFin> <salario> <moneda> <cuentaBancaria>	
-	When se envia el formulario de alta nueva al sistema
-	Then el sistema devuelve el mensaje "Creado correctamente"
-
-	Examples:
-| nombre		|	apellido	| dni			|	cumpleanos					|	email				| telefono	| sexo	| rol	|	categoria	|	tipoContrato	|	fechaInicio					| fechaFin	|	salario	| moneda	| cuentaBancaria 			|
-
-
-Scenario Outline: Dar de alta un nuevo empleado
+	Scenario Outline: Dar de alta un nuevo empleado
 	Given los datos de entrada <nombre> <apellido> <dni> <cumpleanos> <email> <telefono> <sexo> <rol> <categoria> <tipoContrato> <fechaInicio> <fechaFin> <salario> <moneda> <cuentaBancaria>	
 	When se envia el formulario de alta nueva al sistema
 	Then el sistema devuelve el resultado <resultado>
-	And si el resultado no es "201", el mensaje de error <mensaje>
+	And si el <resultado> no es "201", se devuelve el mensaje de error <mensaje>
 	
 	Examples:
 | nombre		|	apellido	| dni			|	cumpleanos					|	email				| telefono	| sexo	| rol	|	categoria	|	tipoContrato	|	fechaInicio					| fechaFin					|	salario	| moneda	| cuentaBancaria 			| resultado	| mensaje													|
@@ -104,8 +95,8 @@ Scenario Outline: Dar de alta un nuevo empleado
 	Given los datos de entrada <campo> <valor1> <valor> <tipo>	
 	When se envia el formulario de consulta al sistema
 	Then el sistema devuelve el resultado <resultado>
-	And si el resultado es "200", devuelve <num> resultados
-	And si el resultado es "400", devuelve <mensaje>
+	And si el <resultado> es "200", devuelve <num> resultados
+	And si el <resultado> es "400", devuelve <mensaje>
 
 	Examples:
 | campo		| valor1	| valor2	| tipo		| resultado	| num	| mensaje												|
