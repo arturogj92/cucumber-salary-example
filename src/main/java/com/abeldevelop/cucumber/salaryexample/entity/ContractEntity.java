@@ -25,7 +25,7 @@ public class ContractEntity {
 	private String categoria;
 	private String tipoContrato;
 	private LocalDate fechaInicio;
-	private String salario;
+	private Double salario;
 	private String moneda;
 	private LocalDate fechaFin;
 	private String cuentaBancaria;

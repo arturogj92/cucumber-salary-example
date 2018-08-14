@@ -8,7 +8,7 @@ public interface EmployeeSearchRepository {
 
 	public List<EmployeeEntity> busquedaSimple(String data);
 	
-	public List<EmployeeEntity> busquedaPorSalario(String minSalary, String maxSalary, String comparator);
+	public List<EmployeeEntity> busquedaPorSalario(String minSalary, String maxSalary);
 
 	
 }

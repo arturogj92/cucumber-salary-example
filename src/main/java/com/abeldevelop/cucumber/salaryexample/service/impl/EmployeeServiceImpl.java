@@ -7,9 +7,11 @@ import java.util.Optional;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.abeldevelop.cucumber.salaryexample.converter.ConverterEmployeeResourceToModel;
 import com.abeldevelop.cucumber.salaryexample.entity.EmployeeEntity;
+import com.abeldevelop.cucumber.salaryexample.exception.BadRequestException;
 import com.abeldevelop.cucumber.salaryexample.exception.UserNotFoundException;
 import com.abeldevelop.cucumber.salaryexample.repository.EmployeeSearchRepository;
 import com.abeldevelop.cucumber.salaryexample.repository.EmployeeSpringDataRepository;
@@ -60,7 +62,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeInDatabase.getContrato().setTipoContrato(employee.getContrato().getTipoContrato());
 		employeeInDatabase.getContrato().setFechaInicio(employee.getContrato().getFechaInicio());
 		employeeInDatabase.getContrato().setFechaFin(employee.getContrato().getFechaFin());
-		employeeInDatabase.getContrato().setSalario(employee.getContrato().getSalario());
+		employeeInDatabase.getContrato().setSalario(Double.parseDouble(employee.getContrato().getSalario()));
 		employeeInDatabase.getContrato().setMoneda(employee.getContrato().getMoneda());
 		employeeInDatabase.getContrato().setCuentaBancaria(employee.getContrato().getCuentaBancaria());
 		
@@ -109,9 +111,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	@Override
-	public List<Employee> busquedaPorSalario(String minSalary, String maxSalary, String comparator) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Employee> busquedaPorSalario(String minSalary, String maxSalary) {
+		if(StringUtils.isEmpty(minSalary) && StringUtils.isEmpty(maxSalary)) {
+			throw new BadRequestException(messageSource.getMessage("message.error.mandatoryMinSalaryOrMaxSalary", null, LocaleContextHolder.getLocale()));
+		}
+		List<Employee> employee = new ArrayList<>();
+		List<EmployeeEntity> employeeEntityList = employeeSearchRepository.busquedaPorSalario(minSalary, maxSalary);
+		for(EmployeeEntity employeeEntity : employeeEntityList) {
+			employee.add(ConverterEmployeeResourceToModel.modelToResource(employeeEntity));
+		}
+		return employee;
 	}
 
 	

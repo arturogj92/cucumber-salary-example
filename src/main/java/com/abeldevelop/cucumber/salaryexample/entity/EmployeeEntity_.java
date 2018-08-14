@@ -18,4 +18,5 @@ public class EmployeeEntity_ {
 	public static volatile SingularAttribute<EmployeeEntity, String> sexo;
 	public static volatile SingularAttribute<EmployeeEntity, String> rol;
 	public static volatile SingularAttribute<EmployeeEntity, ContractEntity> contrato;
+	public static volatile SingularAttribute<EmployeeEntity, String> nombreCompleto;
 }

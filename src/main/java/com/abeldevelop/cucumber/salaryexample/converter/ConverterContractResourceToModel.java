@@ -10,7 +10,7 @@ public abstract class ConverterContractResourceToModel {
 		contract.setCategoria(contractEntity.getCategoria());
 		contract.setTipoContrato(contractEntity.getTipoContrato());
 		contract.setFechaInicio(contractEntity.getFechaInicio());
-		contract.setSalario(contractEntity.getSalario());
+		contract.setSalario(Double.toString(contractEntity.getSalario()));
 		contract.setMoneda(contractEntity.getMoneda());
 		contract.setFechaFin(contractEntity.getFechaFin());
 		contract.setCuentaBancaria(contractEntity.getCuentaBancaria());
@@ -23,7 +23,7 @@ public abstract class ConverterContractResourceToModel {
 		contractEntity.setCategoria(contract.getCategoria());
 		contractEntity.setTipoContrato(contract.getTipoContrato());
 		contractEntity.setFechaInicio(contract.getFechaInicio());
-		contractEntity.setSalario(contract.getSalario());
+		contractEntity.setSalario(Double.parseDouble(contract.getSalario()));
 		contractEntity.setMoneda(contract.getMoneda());
 		contractEntity.setFechaFin(contract.getFechaFin());
 		contractEntity.setCuentaBancaria(contract.getCuentaBancaria());

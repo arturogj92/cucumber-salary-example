@@ -19,6 +19,6 @@ public interface EmployeeService {
 	
 	public List<Employee> busquedaSimple(String data);
 	
-	public List<Employee> busquedaPorSalario(String minSalary, String maxSalary, String comparator);
+	public List<Employee> busquedaPorSalario(String minSalary, String maxSalary);
 	
 }
