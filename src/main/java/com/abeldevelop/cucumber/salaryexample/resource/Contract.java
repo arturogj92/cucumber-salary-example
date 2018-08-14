@@ -6,9 +6,11 @@ import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Setter
 @Getter
+@ToString
 public class Contract {
 
 	
@@ -19,8 +21,8 @@ public class Contract {
 	private String tipoContrato;
 	
 	@NotNull
-	private LocalDate fechaInicio;
-	private LocalDate fechaFin;
+	private String fechaInicio;
+	private String fechaFin;
 	
 	private String salario;
 	

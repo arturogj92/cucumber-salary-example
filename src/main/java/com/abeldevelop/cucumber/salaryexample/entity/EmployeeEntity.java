@@ -31,7 +31,7 @@ public class EmployeeEntity {
     private String apellido;
     private String email;
     private String dni;
-    private LocalDate cumpleanos;
+    private String cumpleanos;
     private String telefono;
     private String sexo;
     private String rol;
