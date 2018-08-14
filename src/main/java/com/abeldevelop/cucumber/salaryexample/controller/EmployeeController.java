@@ -68,8 +68,8 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/employee/search")
-	public ResponseEntity<List<Employee>> busquedaPorSalario(@PathParam("minSalary") String minSalary, @PathParam("maxSalary") String maxSalary, @PathParam("comparator") String comparator) {
-		return new ResponseEntity<>(employeeService.busquedaPorSalario(minSalary, maxSalary, comparator), HttpStatus.OK);
+	public ResponseEntity<List<Employee>> busquedaPorSalario(@PathParam("minSalary") String minSalary, @PathParam("maxSalary") String maxSalary) {
+		return new ResponseEntity<>(employeeService.busquedaPorSalario(minSalary, maxSalary), HttpStatus.OK);
 	}
 	
 }

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Formula;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,4 +39,9 @@ public class EmployeeEntity {
     @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "contract_id")
     private ContractEntity contrato;
+    
+    @Formula(value = "nombre || apellido")
+    private String nombreCompleto;
+
+
 }
