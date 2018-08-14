@@ -1,33 +1,26 @@
 {
 	"info": {
-		"_postman_id": "8d34842b-edf5-4737-93e0-68c9515e8365",
+		"_postman_id": "dfcd49f7-da84-407d-860a-560da27c4890",
 		"name": "Cucumber Salary Example Service",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Create Employee",
+			"name": "Delete Employee",
 			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\t\"id\": null,\r    \"nombre\": \"Abel\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
-				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
 				"url": {
-					"raw": "http://localhost:8080/employee",
+					"raw": "http://localhost:8080/employee/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"employee"
+						"employee",
+						"1"
 					]
 				}
 			},
@@ -60,9 +53,9 @@
 			"response": []
 		},
 		{
-			"name": "Update Employee",
+			"name": "Create Employee",
 			"request": {
-				"method": "PUT",
+				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -71,7 +64,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\t\"id\": \"1\",\r    \"nombre\": \"Arturo\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
+					"raw": "{\r\t\"id\": null,\r    \"nombre\": \"Abel\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
 				},
 				"url": {
 					"raw": "http://localhost:8080/employee",
@@ -82,95 +75,6 @@
 					"port": "8080",
 					"path": [
 						"employee"
-					]
-				}
-			},
-			"response": [
-				{
-					"name": "Arturo",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\t\"id\": null,\r    \"nombre\": \"Arturo\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
-						},
-						"url": {
-							"raw": "http://localhost:8080/employee",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"employee"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				},
-				{
-					"name": "Abel",
-					"originalRequest": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\t\"id\": null,\r    \"nombre\": \"Abel\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
-						},
-						"url": {
-							"raw": "http://localhost:8080/employee",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"employee"
-							]
-						}
-					},
-					"status": "OK",
-					"code": 200,
-					"_postman_previewlanguage": "",
-					"header": [],
-					"cookie": [],
-					"body": ""
-				}
-			]
-		},
-		{
-			"name": "Delete Employee",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {},
-				"url": {
-					"raw": "http://localhost:8080/employee/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"employee",
-						"1"
 					]
 				}
 			},
@@ -213,6 +117,132 @@
 						"employee",
 						"search",
 						"ab"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Employee",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\t\"id\": \"1\",\r    \"nombre\": \"Arturo\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
+				},
+				"url": {
+					"raw": "http://localhost:8080/employee",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Abel",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\t\"id\": \"1\",\r    \"nombre\": \"Arturo\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				},
+				{
+					"name": "Arturo",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\t\"id\": \"1\",\r    \"nombre\": \"Arturo\",\r    \"apellido\": \"Fernandez\",\r    \"email\": \"email@email.com\",\r    \"dni\": \"12345678A\",\r    \"cumpleanos\": \"2012-04-23T18:25:43.511Z\",\r    \"telefono\": \"123456789\",\r    \"sexo\": \"Hombre\",\r    \"rol\": \"Programador\",\r    \"contrato\": {\r    \t\"categoria\": \"Programador\",\r\t\t\"tipoContrato\": \"Indefinido\",\r\t\t\"fechaInicio\": \"2012-04-23T18:25:43.511Z\",\r\t\t\"fechaFin\": null,\r\t\t\"salario\": \"1200.00\",\r\t\t\"moneda\": \"Euro\",\r\t\t\"cuentaBancaria\": \"ES1754071859586352106643\"\r    }\r} "
+						},
+						"url": {
+							"raw": "http://localhost:8080/employee",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"employee"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "Text",
+					"header": [],
+					"cookie": [],
+					"body": ""
+				}
+			]
+		},
+		{
+			"name": "Seach By Salary",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/employee/search?minSalary=1200&maxSalary=1225",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"employee",
+						"search"
+					],
+					"query": [
+						{
+							"key": "minSalary",
+							"value": "1200"
+						},
+						{
+							"key": "maxSalary",
+							"value": "1225"
+						}
 					]
 				}
 			},
