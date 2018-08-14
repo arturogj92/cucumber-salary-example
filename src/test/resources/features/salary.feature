@@ -29,7 +29,7 @@ Feature: Dar de alta un nuevo empleado
 
 
 	Scenario Outline: Buscar datos de empleados
-	Given los datos de busqueda <campoBusqueda> <valor1Busqueda> <valor2Busqueda>	
+	Given los datos de busqueda "<campoBusqueda>" "<valor1Busqueda>" "<valor2Busqueda>"	
 	When se envia el formulario de consulta al sistema
 	Then el sistema devuelve el resultado <resultado>
 	And si el <resultado> es "200", devuelve <num> resultados

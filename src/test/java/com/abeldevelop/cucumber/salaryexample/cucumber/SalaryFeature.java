@@ -50,15 +50,13 @@ public class SalaryFeature extends SpringIntegrationTest {
 		employee.getContrato().setSalario(salario);
 		employee.getContrato().setMoneda(moneda);
 		employee.getContrato().setCuentaBancaria(cuentaBancaria);
-		System.out.println("AFG " + employee);
     }
 
-	@Given("^los datos de busqueda (.*) (.*) (.*)$")
+	@Given("^los datos de busqueda \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
     public void crearDatosBusqueda(String campoBusqueda, String valor1Busqueda, String valor2Busqueda) {
-		System.out.println("AFG " + campoBusqueda + ", " + valor1Busqueda + ", " + valor2Busqueda);
-		this.campoBusqueda = campoBusqueda;
-		this.valor1Busqueda = valor1Busqueda;
-		this.valor2Busqueda = valor2Busqueda;
+		this.campoBusqueda = isStringNull(campoBusqueda);
+		this.valor1Busqueda = isStringNull(valor1Busqueda);
+		this.valor2Busqueda = isStringNull(valor2Busqueda);
     }
 	
     @When("^se envia el formulario de alta nueva al sistema$")
@@ -75,13 +73,11 @@ public class SalaryFeature extends SpringIntegrationTest {
     
     @Then("^el sistema devuelve el resultado (\\d+)$")
 	public void checkResultNewEmployee(int code) throws Exception {
-    	System.out.println("AFG code " + code);
     	perform.andExpect(MockMvcResultMatchers.status().is(code));
 	}
     
     @Then("^si el (.*) no es \"201\", se devuelve el mensaje de error (.*)$")
     public void validaErrorAlta(int resultado, String mensaje) throws Exception {
-    	System.out.println("AFG resultado, mensaje " + resultado + ", " + mensaje);
     	if(resultado != 201) {
     		perform.andExpect(
     				MockMvcResultMatchers.jsonPath("[0].message").value(mensaje)
@@ -133,5 +129,12 @@ public class SalaryFeature extends SpringIntegrationTest {
     }
     
     
+    
+    private String isStringNull(String strIn) {
+    	if(StringUtils.isEmpty(strIn) || strIn.equals("null")) {
+    		return null;
+    	}
+    	return strIn;
+    }
     
 }
