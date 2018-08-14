@@ -92,7 +92,7 @@ Feature: Dar de alta un nuevo empleado
 | Pepito     	| Ccc			| 12345123H	  	|  1980-03-03T00:00:00.000Z  	|  pepitoc@email.com	| 666666668	| 		| QA	| 3          	|	I               |   2018-07-29T00:00:00.000Z  	| 							|   35000   |  			| ES7389392982837439423453	| 400		| El telefono ya esta dado de alta en el sistema			|
 	
 	Scenario Outline: Buscar datos de empleados
-	Given los datos de entrada <campo> <valor1> <valor> <tipo>	
+	Given los datos de busqueda <campo> <valor1> <valor2> <tipo>	
 	When se envia el formulario de consulta al sistema
 	Then el sistema devuelve el resultado <resultado>
 	And si el <resultado> es "200", devuelve <num> resultados
