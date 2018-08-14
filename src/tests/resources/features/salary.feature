@@ -126,3 +126,35 @@ Feature: Dar de alta un nuevo empleado
 | salario	| 35000		| 			|			| 400		| 4		| El tipo de busqueda no puede estar vacio				|
 | salario	| 35000		| 15000		| between	| 400		| 4		| El primer valor debe ser menor que el segundo			|
 
+	Scenario Outline: Buscar datos de empleados
+	Given los datos de busqueda <campo> <valor1> <valor2>	
+	When se envia el formulario de consulta al sistema
+	Then el sistema devuelve el resultado <resultado>
+	And si el <resultado> es "200", devuelve <num> resultados
+	And si el <resultado> es "400", devuelve <mensaje>
+
+	Examples:
+| campo		| valor1	| valor2	| resultado	| num	| mensaje												|
+| nombre	| epi		| 			| 200		| 4		|  														|
+| apellido	| aa		| 			| 200		| 2		| 														|
+| dni		| 123B		| 			| 200		| 2		| 														|
+| minsalario| 35000		| 			| 200		| 2		| 														|
+| maxsalario| 28000		| 			| 200		| 2		| 														|
+| salario	| 33000		| 			| 200		| 2		| 														|
+| salario	| 25000		| 36000		| 200		| 5		| 														|
+| nombre	| iii		| 			| 200		| 		|  														|
+| apellido	| ooo		| 			| 200		| 		| 														|
+| dni		| ppp		| 			| 200		| 		| 														|
+| maxsalario| 11000		| 			| 200		| 		| 														|
+| minsalario| 35000		| 			| 200		| 		| 														|
+| salario	| 38000		| 40000		| 200		| 		| 														|
+| nombre	| 			| 			| 400		| 4		| El valor de busqueda no puede estar vacio				|
+| apellido	| 			| 			| 400		| 4		| El valor de busqueda no puede estar vacio				|
+| dni		| 			| 			| 400		| 4		| El valor de busqueda no puede estar vacio				|
+| salario	| 			| 			| 400		| 4		| El valor de busqueda no puede estar vacio				|
+| nombre	| e			| 			| 400		| 4		| El valor de busqueda debe tener al menos 2 caracteres |
+| apellido	| e			| 			| 400		| 4		| El valor de busqueda debe tener al menos 2 caracteres |
+| dni		| e			| 			| 400		| 4		| El valor de busqueda debe tener al menos 2 caracteres |
+| salario	| 233e		| 			| 400		| 4		| El salario no puede contener caracteres				|
+| salario	| 35000		| 			| 400		| 4		| El tipo de busqueda no puede estar vacio				|
+| salario	| 35000		| 15000		| 400		| 4		| El primer valor debe ser menor que el segundo			|
