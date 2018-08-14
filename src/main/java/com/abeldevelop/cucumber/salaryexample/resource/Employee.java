@@ -1,5 +1,6 @@
 package com.abeldevelop.cucumber.salaryexample.resource;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -46,6 +47,7 @@ public class Employee {
     private String rol;
     
     @NotNull
+    @Valid
     private Contract contrato;
 
     
