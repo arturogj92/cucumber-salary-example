@@ -1,7 +1,8 @@
 Feature: Dar de alta un nuevo empleado
 			
 	Scenario Outline: Dar de alta un nuevo empleado
-	Given los datos de entrada <nombre> <apellido> <dni> <cumpleanos> <email> <telefono> <sexo> <rol> <categoria> <tipoContrato> <fechaInicio> <fechaFin> <salario> <moneda> <cuentaBancaria>	
+	Given los datos de entrada 
+	| <nombre> |<apellido> |<dni> |<cumpleanos> |<email> |<telefono> |<sexo> |<rol> |<categoria> |<tipoContrato> |<fechaInicio> |<fechaFin> |<salario> |<moneda> |<cuentaBancaria>	|
 	When se envia el formulario de alta nueva al sistema
 	Then el sistema devuelve el resultado <resultado>
 	And si el <resultado> no es "201", se devuelve el mensaje de error <mensaje>
