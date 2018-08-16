@@ -75,4 +75,24 @@ public class EmployeeSearchRepositoryImpl implements EmployeeSearchRepository {
 		List<EmployeeEntity> result = em.createQuery(criteriaQuery).getResultList();
 		return result;
 	}
+	
+	@Override
+	public List<EmployeeEntity> checkIsEmployeeExist(String dni, String email, String telefono) {
+		CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
+		CriteriaQuery<EmployeeEntity> criteriaQuery = criteriaBuilder.createQuery(EmployeeEntity.class);
+		Root<EmployeeEntity> root = criteriaQuery.from(EmployeeEntity.class);
+		List<Predicate> predicates = new ArrayList<>();
+		
+		Predicate or = criteriaBuilder.or(
+				criteriaBuilder.equal(root.get(EmployeeEntity_.dni), dni),
+				criteriaBuilder.equal(root.get(EmployeeEntity_.email), email),
+				criteriaBuilder.equal(root.get(EmployeeEntity_.telefono), telefono)
+		);
+		
+		predicates.add(or);
+		criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()]));
+		
+		List<EmployeeEntity> result = em.createQuery(criteriaQuery).getResultList();
+		return result;
+	}
 }

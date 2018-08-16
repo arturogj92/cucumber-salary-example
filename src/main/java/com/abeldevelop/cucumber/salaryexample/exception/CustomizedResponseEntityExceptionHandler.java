@@ -35,6 +35,16 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler(CucumberSalaryExampleServiceException.class)
+	public final ResponseEntity<Object> handleUserNotFoundException(CucumberSalaryExampleServiceException ex, WebRequest request) {
+		List<ExceptionResponse> exceptionResponseList = new ArrayList<>();
+		for(String str : ex.getMessages()) {
+			exceptionResponseList.add(new ExceptionResponse(new Date(), str, request.getDescription(false)));
+		}
+		
+		return new ResponseEntity<>(exceptionResponseList, HttpStatus.BAD_REQUEST);
+	}
+	
 	@ExceptionHandler(BadRequestException.class)
 	public final ResponseEntity<Object> handleUserNotFoundException(BadRequestException ex, WebRequest request) {
 		ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));

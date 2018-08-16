@@ -10,5 +10,5 @@ public interface EmployeeSearchRepository {
 	
 	public List<EmployeeEntity> busquedaPorSalario(String minSalary, String maxSalary);
 
-	
+	public List<EmployeeEntity> checkIsEmployeeExist(String dni, String email, String telefono);
 }

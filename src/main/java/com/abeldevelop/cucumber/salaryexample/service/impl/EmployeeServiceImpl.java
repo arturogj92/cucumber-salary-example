@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 import com.abeldevelop.cucumber.salaryexample.converter.ConverterEmployeeResourceToModel;
 import com.abeldevelop.cucumber.salaryexample.entity.EmployeeEntity;
 import com.abeldevelop.cucumber.salaryexample.exception.BadRequestException;
+import com.abeldevelop.cucumber.salaryexample.exception.CucumberSalaryExampleServiceException;
 import com.abeldevelop.cucumber.salaryexample.exception.UserNotFoundException;
 import com.abeldevelop.cucumber.salaryexample.repository.EmployeeSearchRepository;
 import com.abeldevelop.cucumber.salaryexample.repository.EmployeeSpringDataRepository;
@@ -32,6 +33,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public Employee crearUsuario(Employee employee) {
+		checkIsEmployeeExist(employee);
+		
 		EmployeeEntity employeeEntity = ConverterEmployeeResourceToModel.resourceToModel(employee); 
 		employeeSpringDataRepository.save(employeeEntity);
 		return ConverterEmployeeResourceToModel.modelToResource(employeeEntity);
@@ -102,6 +105,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> busquedaSimple(String data) {
+		if(data == null || data.trim().length() == 0) {
+			throw new CucumberSalaryExampleServiceException("El valor de busqueda no puede estar vacio");
+		}
+		if(data.trim().length() == 1) {
+			throw new CucumberSalaryExampleServiceException("El valor de busqueda debe tener al menos 2 caracteres");
+		}
 		List<Employee> employee = new ArrayList<>();
 		List<EmployeeEntity> employeeEntityList = employeeSearchRepository.busquedaSimple(data);
 		for(EmployeeEntity employeeEntity : employeeEntityList) {
@@ -112,9 +121,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> busquedaPorSalario(String minSalary, String maxSalary) {
-		if(StringUtils.isEmpty(minSalary) && StringUtils.isEmpty(maxSalary)) {
-			throw new BadRequestException(messageSource.getMessage("message.error.mandatoryMinSalaryOrMaxSalary", null, LocaleContextHolder.getLocale()));
+		//Validaciones
+		if((minSalary == null || minSalary.trim().length() == 0) &&
+				(maxSalary == null || maxSalary.trim().length() == 0)	) {
+			throw new CucumberSalaryExampleServiceException("El valor de busqueda no puede estar vacio");
 		}
+		try {
+			if((minSalary != null && minSalary.trim().length() > 0)) {
+				Double.parseDouble(minSalary);
+			}
+			if((maxSalary != null && maxSalary.trim().length() > 0)) {
+				Double.parseDouble(maxSalary);
+			}
+		} catch (NumberFormatException e) {
+			throw new CucumberSalaryExampleServiceException("El salario no puede contener caracteres");
+		}
+		
+		if((minSalary != null && minSalary.trim().length() > 0) &&
+				(maxSalary != null && maxSalary.trim().length() > 0) &&
+				Double.parseDouble(maxSalary) < Double.parseDouble(minSalary)
+				) {
+			throw new CucumberSalaryExampleServiceException("El primer valor debe ser menor que el segundo");
+		}
+		
 		List<Employee> employee = new ArrayList<>();
 		List<EmployeeEntity> employeeEntityList = employeeSearchRepository.busquedaPorSalario(minSalary, maxSalary);
 		for(EmployeeEntity employeeEntity : employeeEntityList) {
@@ -123,6 +152,21 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employee;
 	}
 
-	
+	private void checkIsEmployeeExist(Employee employee) {
+		List<EmployeeEntity> employees = employeeSearchRepository.checkIsEmployeeExist(employee.getDni(), employee.getEmail(), employee.getTelefono());
+		
+		if(employees != null && !employees.isEmpty()) {
+			if(employees.get(0).getDni().equals(employee.getDni())) {
+				throw new CucumberSalaryExampleServiceException("El dni ya esta dado de alta en el sistema");
+			}
+			if(employees.get(0).getEmail().equals(employee.getEmail())) {
+				throw new CucumberSalaryExampleServiceException("El email ya esta dado de alta en el sistema");
+			}
+			if(employees.get(0).getTelefono().equals(employee.getTelefono())) {
+				throw new CucumberSalaryExampleServiceException("El telefono ya esta dado de alta en el sistema");
+			}
+		}
+		
+	}
 
 }
