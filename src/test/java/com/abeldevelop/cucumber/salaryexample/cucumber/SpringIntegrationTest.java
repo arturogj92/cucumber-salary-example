@@ -3,6 +3,7 @@ package com.abeldevelop.cucumber.salaryexample.cucumber;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
@@ -11,6 +12,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import com.abeldevelop.cucumber.salaryexample.CucumberSalaryExampleApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+@ActiveProfiles("test")
 @ContextConfiguration(
 		  classes = CucumberSalaryExampleApplication.class
 )

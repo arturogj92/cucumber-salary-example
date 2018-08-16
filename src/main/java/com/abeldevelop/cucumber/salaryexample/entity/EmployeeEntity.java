@@ -1,7 +1,5 @@
 package com.abeldevelop.cucumber.salaryexample.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
 
@@ -21,6 +20,7 @@ import lombok.Setter;
 @Getter
 
 @Entity
+@Table(name="Employee")
 @SequenceGenerator(name="EMPLOYEE_SEQ", sequenceName="employee_seq")
 public class EmployeeEntity {
 
@@ -40,7 +40,7 @@ public class EmployeeEntity {
     @JoinColumn(name = "contract_id")
     private ContractEntity contrato;
     
-    @Formula(value = "nombre || apellido")
+    @Formula( value = "CONCAT(nombre, ' ', apellido)")
     private String nombreCompleto;
 
 
