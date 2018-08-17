@@ -4,7 +4,6 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.MediaType;
@@ -25,36 +24,31 @@ public class SalaryFeature extends SpringIntegrationTest {
 	private String campoBusqueda;
 	private String valor1Busqueda;
 	private String valor2Busqueda;
-	private String tc;
 	
 	@Given("^los datos de entrada$")
-    //public void crearEmployee(String nombre, String apellido, String dni, String cumpleanos, String email, String telefono, String sexo, String rol, String categoria, String tipoContrato, String fechaInicio, String fechaFin, String salario, String moneda, String cuentaBancaria) {
 	public void crearEmployee(DataTable dataTable) {
-		List<String> data = dataTable.raw().get(0);
-		//driver.findElement(By.id("log")).sendKeys(data.get(0).get(0));
-		int contador = 0;
+		Map<String, String> map = dataTable.asMaps(String.class, String.class).get(0);
 		employee = new Employee();
-		employee.setNombre(StringUtils.setNull(data.get(contador++)));
-		employee.setApellido(StringUtils.setNull(data.get(contador++)));
-		employee.setDni(StringUtils.setNull(data.get(contador++)));
-		employee.setCumpleanos(StringUtils.setNull(data.get(contador++)));
-		employee.setEmail(StringUtils.setNull(data.get(contador++)));
-		employee.setTelefono(StringUtils.setNull(data.get(contador++)));
-		employee.setSexo(StringUtils.setNull(data.get(contador++)));
-		employee.setRol(StringUtils.setNull(data.get(contador++)));
+		employee.setNombre(StringUtils.setNull(map.get("nombre")));
+		employee.setApellido(StringUtils.setNull(map.get("apellido")));
+		employee.setDni(StringUtils.setNull(map.get("dni")));
+		employee.setCumpleanos(StringUtils.setNull(map.get("cumpleanos")));
+		employee.setEmail(StringUtils.setNull(map.get("email")));
+		employee.setTelefono(StringUtils.setNull(map.get("telefono")));
+		employee.setSexo(StringUtils.setNull(map.get("sexo")));
+		employee.setRol(StringUtils.setNull(map.get("rol")));
 		employee.setContrato(new Contract());
-		employee.getContrato().setCategoria(StringUtils.setNull(data.get(contador++)));
-		employee.getContrato().setTipoContrato(StringUtils.setNull(data.get(contador++)));
-		employee.getContrato().setFechaInicio(StringUtils.setNull(data.get(contador++)));
-		employee.getContrato().setFechaFin(StringUtils.setNull(data.get(contador++)));
-		employee.getContrato().setSalario(StringUtils.setNull(data.get(contador++)));
-		employee.getContrato().setMoneda(StringUtils.setNull(data.get(contador++)));
-		employee.getContrato().setCuentaBancaria(StringUtils.setNull(data.get(contador++)));
+		employee.getContrato().setCategoria(StringUtils.setNull(map.get("contrato.categoria")));
+		employee.getContrato().setTipoContrato(StringUtils.setNull(map.get("contrato.tipoContrato")));
+		employee.getContrato().setFechaInicio(StringUtils.setNull(map.get("contrato.fechaInicio")));
+		employee.getContrato().setFechaFin(StringUtils.setNull(map.get("contrato.fechaFin")));
+		employee.getContrato().setSalario(StringUtils.setNull(map.get("contrato.salario")));
+		employee.getContrato().setMoneda(StringUtils.setNull(map.get("contrato.moneda")));
+		employee.getContrato().setCuentaBancaria(StringUtils.setNull(map.get("contrato.cuentaBancaria")));
     }
 
-	@Given("^los datos de busqueda (.*) \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
-    public void crearDatosBusqueda(String tc, String campoBusqueda, String valor1Busqueda, String valor2Busqueda) {
-		this.tc = StringUtils.setNull(tc);
+	@Given("^los datos de busqueda \"([^\"]*)\" \"([^\"]*)\" \"([^\"]*)\"$")
+    public void crearDatosBusqueda(String campoBusqueda, String valor1Busqueda, String valor2Busqueda) {
 		this.campoBusqueda = StringUtils.setNull(campoBusqueda);
 		this.valor1Busqueda = StringUtils.setNull(valor1Busqueda);
 		this.valor2Busqueda = StringUtils.setNull(valor2Busqueda);
